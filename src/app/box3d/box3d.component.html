@@ -1,0 +1,18 @@
+<div class="card mb-4 shadow-sm" (mouseenter)="onMouseEnter()" (mouseleave) = "onMouseLeave()" (mousedown)="onMouseDown()" (mouseup) = "onMouseUp()">
+  <div #rendererContainer width="100%" height="225px">
+
+  </div>
+  <!--<img class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{{default_img}}" data-holder-rendered="true">
+-->
+
+<div class="card-body">
+    <p class="card-text">{{default_text}}</p>
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-outline-secondary">Select</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary">Remove</button>
+      </div>
+      <small class="text-muted">{{default_state}}</small>
+    </div>
+  </div>
+</div>
