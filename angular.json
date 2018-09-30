@@ -27,10 +27,12 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "../node_modules/jquery/dist/jquery.js",
-              "../node_modules/bootstrap/dist/js/bootstrap.js",
-              "../node_modules/three/build/three.min.js",
-              "../node_modules/three-full/builds/Three.es.js"
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/three/build/three.min.js",
+              "node_modules/three-full/builds/Three.es.js",
+              "node_components/ngx-vis/components/network/index.js",
+              "node_components/ngx-vis/bundles/ngx-vis.js"
             ]
           },
           "configurations": {
@@ -82,10 +84,12 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "../node_modules/jquery/dist/jquery.js",
-              "../node_modules/bootstrap/dist/js/bootstrap.js",
-              "../node_modules/three/build/three.min.js",
-              "../node_modules/three-full/builds/Three.es.js"
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/three/build/three.min.js",
+              "node_modules/three-full/builds/Three.es.js",
+              "node_components/ngx-vis/components/network/index.js",
+              "node_components/ngx-vis/bundles/ngx-vis.js"
             ],
             "assets": [
               "src/favicon.ico",

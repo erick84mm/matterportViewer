@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class List3dboxesComponent implements OnInit {
 
-  constructor() { }
+  Scan = "2t7WUuJeko7";
+
+  constructor() {
+
+  }
 
   ngOnInit() {
   }
