@@ -9,6 +9,7 @@ import { HttpClientModule,HttpClient, HttpHeaders }    from '@angular/common/htt
 import { GraphComponent } from './graph/graph.component';
 import { VisNetworkService } from '../../node_modules/ngx-vis/components/network';
 import { VisModule } from '../../node_modules/ngx-vis';
+import {ChangePreviewService} from './previewService/change-preview.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { VisModule } from '../../node_modules/ngx-vis';
     VisModule,
     HttpClientModule
   ],
-  providers: [VisNetworkService],
+  providers: [VisNetworkService, ChangePreviewService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

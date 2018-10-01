@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit, Input} from '@angular/core';
+import { HttpClient }    from '@angular/common/http';
+import {ChangePreviewService} from '../previewService/change-preview.service';
 
 import {
     VisEdges,
@@ -24,20 +26,20 @@ export class GraphComponent implements OnInit, OnDestroy {
    public visNetwork: string = 'networkId1';
    public visNetworkData: NetworkData;
    public visNetworkOptions: VisNetworkOptions;
+   @Input() public scan: string = null;
 
-   public constructor(private visNetworkService: VisNetworkService) {
-     console.log("constructor");
+   public constructor(private visNetworkService: VisNetworkService, private http: HttpClient,private changePreviewService: ChangePreviewService) {
+
+
     }
 
    public addNode(): void {
-     console.log("addNode");
        const newId = this.visNetworkData.nodes.getLength() + 1;
        this.visNetworkData.nodes.add({ id: newId.toString(), label: 'Node ' + newId });
        this.visNetworkService.fit(this.visNetwork);
    }
 
    public networkInitialized(): void {
-     console.log("networkInitialized");
        // now we can use the service to register on events
        this.visNetworkService.on(this.visNetwork, 'click');
 
@@ -45,36 +47,44 @@ export class GraphComponent implements OnInit, OnDestroy {
        this.visNetworkService.click
            .subscribe((eventData: any[]) => {
                if (eventData[0] === this.visNetwork) {
-                 console.log(eventData[1]);
+                for (let i in eventData[1]["nodes"]){
+                  var img_id = eventData[1]["nodes"][i];
+
+                  console.log(img_id);
+                  if(typeof img_id !== 'undefined'){
+
+                      this.changePreviewService.change(img_id);
+
+                  }
+                }
                }
            });
    }
 
+
    public ngOnInit(): void {
-     console.log("ngOnInit");
-       const nodes = new VisNodes([
-           { id: '1', label: 'Node 1', x: 0, y:0},
-           { id: '2', label: 'Node 2', x: 110.2, y:105.6 },
-           { id: '3', label: 'Node 3', x: 210.2, y:105.6  },
-           { id: '4', label: 'Node 4' , x: 310.2, y:105.6  },
-           { id: '5', label: 'Node 5', x: 410.2, y:105.6  , title: 'Title of Node 5' }]);
+        this.http.get(this.scan)
+          .subscribe(data => {
+              const nodes = data["nodes"];
+              const edges = data["edges"];
 
-       const edges = new VisEdges([
-           { from: '1', to: '3' },
-           { from: '1', to: '2' },
-           { from: '2', to: '4' },
-           { from: '2', to: '5' }]);
+              this.visNetworkData = {
+                  nodes,
+                  edges,
+              };
 
-       this.visNetworkData = {
-           nodes,
-           edges,
-       };
+              this.visNetworkOptions = {
+                 physics:false,
+                 layout: {randomSeed:0}
+                 interaction:{
+                  dragNodes:false,
+                  dragView: false,
+                  multiselect: true
+                }
 
-       this.visNetworkOptions = {
+              };
 
-          physics:false,
-          layout: {randomSeed:0}
-       };
+             });
 
    }
 
