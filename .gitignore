@@ -37,6 +37,7 @@ testem.log
 
 #assets folder
 src/assets/
+v1
 
 # System Files
 .DS_Store

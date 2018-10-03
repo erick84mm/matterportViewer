@@ -10,6 +10,7 @@ import { GraphComponent } from './graph/graph.component';
 import { VisNetworkService } from '../../node_modules/ngx-vis/components/network';
 import { VisModule } from '../../node_modules/ngx-vis';
 import {ChangePreviewService} from './previewService/change-preview.service';
+import {ChangeGraphService} from './graphService/change-graph.service';
 import { FooterComponent } from './footer/footer.component';
 import { MenuComponent } from './menu/menu.component';
 import { DragScrollModule } from 'ngx-drag-scroll';
@@ -30,7 +31,7 @@ import { DragScrollModule } from 'ngx-drag-scroll';
     HttpClientModule,
     DragScrollModule
   ],
-  providers: [VisNetworkService, ChangePreviewService],
+  providers: [VisNetworkService, ChangePreviewService, ChangeGraphService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

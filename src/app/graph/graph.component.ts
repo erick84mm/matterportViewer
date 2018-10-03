@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
 import { HttpClient }    from '@angular/common/http';
 import {ChangePreviewService} from '../previewService/change-preview.service';
+import {ChangeGraphService} from '../graphService/change-graph.service';
 
 import {
     VisEdges,
@@ -26,10 +27,16 @@ export class GraphComponent implements OnInit, OnDestroy {
    public visNetwork: string = 'networkId1';
    public visNetworkData: NetworkData;
    public visNetworkOptions: VisNetworkOptions;
+   img_prefix: string = '../assets/graph/';
+   img_posfix: string = '_connectivity.json';
    @Input() public scan: string = null;
    @ViewChild('graphRendererContainer') rendererContainer: ElementRef;
 
-   public constructor(private visNetworkService: VisNetworkService, private http: HttpClient,private changePreviewService: ChangePreviewService) {
+   public constructor(
+     private visNetworkService: VisNetworkService,
+     private http: HttpClient,
+     private changePreviewService: ChangePreviewService,
+     private changeGraphService: ChangeGraphService) {
 
 
     }
@@ -47,14 +54,13 @@ export class GraphComponent implements OnInit, OnDestroy {
        // open your console/dev tools to see the click params
        this.visNetworkService.click
            .subscribe((eventData: any[]) => {
-                     console.log(this.rendererContainer.nativeElement.offsetHeight);
                if (eventData[0] === this.visNetwork) {
                 for (let i in eventData[1]["nodes"]){
                   var img_id = eventData[1]["nodes"][i];
 
                   if(typeof img_id !== 'undefined'){
 
-                      this.changePreviewService.change(img_id);
+                      this.changePreviewService.change(img_id, this.scan);
 
                   }
                 }
@@ -62,13 +68,26 @@ export class GraphComponent implements OnInit, OnDestroy {
            });
    }
 
-ngAfterViewInit(){
-
-          console.log(this.rendererContainer.nativeElement.offsetHeight);
-}
    public ngOnInit(): void {
 
-        this.http.get(this.scan)
+     this.changeGraphService.fire
+       .subscribe(id => {
+         console.log("An id has been received " + id );
+            this.scan = id;
+            this.http.get(this.img_prefix + this.scan + this.img_posfix)
+              .subscribe(data => {
+                  const nodes = data["nodes"];
+                  const edges = data["edges"];
+                  this.visNetworkData = {
+                      nodes,
+                      edges,
+                  };
+                  this.visNetworkService.fit(this.visNetwork);
+              });
+
+       });
+
+        this.http.get(this.img_prefix + this.scan + this.img_posfix)
           .subscribe(data => {
               const nodes = data["nodes"];
               const edges = data["edges"];
@@ -77,6 +96,7 @@ ngAfterViewInit(){
                   nodes,
                   edges,
               };
+
 
               this.visNetworkOptions = {
                  physics:{enabled:false},

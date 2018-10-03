@@ -10,7 +10,7 @@
         (snapAnimationFinished)="onSnapAnimationFinished()"
         #nav
         >
-        <img drag-scroll-item *ngFor="let image of imagelist" [src]="'assets/img/' + image" (click)="clickItem($event, image)"/>
+        <img drag-scroll-item *ngFor="let image of imagelist" [src]="'assets/graph-img/' + image" (click)="clickItem($event, image)"/>
       </drag-scroll>
     </div>
 

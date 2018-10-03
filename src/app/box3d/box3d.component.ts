@@ -21,7 +21,7 @@ export class Box3dComponent implements OnInit,  OnChanges {
   @Input() scan: string;
   @Input() img_id: string;
 
-  img_prefix: string = '../assets/v1/scans/';
+  img_prefix: string = '../../v1/scans/';
   folder: string = '/matterport_skybox_images/';
   img_posfix: string = '_skybox';
   subscription: any = null;
@@ -65,7 +65,7 @@ export class Box3dComponent implements OnInit,  OnChanges {
       image_src = this.img_prefix + this.scan + this.folder + this.img_id + this.img_posfix;
     }
     else{
-      image_src = '../assets/v1/scans/2t7WUuJeko7/matterport_skybox_images/0c3c242b5567468889d3c66eb931d6e8_skybox';
+      image_src = '../../v1/scans/2t7WUuJeko7/matterport_skybox_images/0c3c242b5567468889d3c66eb931d6e8_skybox';
     }
     var directions  = [ "2","4","0","5", "1","3"];
     var imageExt = "_sami.jpg";
@@ -86,8 +86,9 @@ export class Box3dComponent implements OnInit,  OnChanges {
   ngOnInit() {
 
                   this.changePreviewService.fire
-                    .subscribe(id => {
-                      this.img_id=id;
+                    .subscribe(data => {
+                        this.img_id=data.img_id;
+                        this.scan = data.scan_id;
 
                         this.scene.remove( this.mesh );
                         this.mesh = null;
