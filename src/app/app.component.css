@@ -7,9 +7,6 @@
 
 .main{
     height: 100%;
-    overflow-y:auto;
-    position:relative;
-
 }
 .row{
   height: 100%;
@@ -17,14 +14,22 @@
 
 
 
-
+.menuContainer{
+  height: 10vh;
+  min-height: 50px;
+  max-height: 90px;
+}
 
 .mainContainer{
-  height: 80vh;
+  height: 75vh;
   min-height: 400px;
-  overflow: scroll;
 }
 
 .footerContainer{
   height: 15vh;
+}
+
+.scroll{
+  overflow-y:auto;
+  position:relative;
 }
