@@ -1,5 +1,12 @@
-<div class="shadow-sm" width="100%" height="100%" (window:resize)="onWindowResize($event)" (mouseenter)="onMouseEnter()" (mouseleave) = "onMouseLeave()" (mousedown)="onMouseDown()" (mouseup) = "onMouseUp()">
-  <div class="" #rendererContainer></div>
+
+
+
+
+
+
+
+<div class="long shadow-lg p-3 align-middle rounded">
+  <div class="rendererContainer" #rendererContainer (window:resize)="onWindowResize($event)" (mouseenter)="onMouseEnter()" (mouseleave) = "onMouseLeave()" (mousedown)="onMouseDown()" (mouseup) = "onMouseUp()"></div>
   <!--<img class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{{default_img}}" data-holder-rendered="true">
 -->
   <div class="float-right">

@@ -1,16 +1,19 @@
-
-
-
-<div class="alert alert-primary" role="alert">
-  Select the reference object at each image, if you don't select one, an algorithm will pick 1 to 3 reference points automatically for you.
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 col-lg-8">
-        <app-graph scan="../assets/graph/2t7WUuJeko7_connectivity.json"></app-graph>
+<div class="container-fluid main">
+  <div class="alert alert-primary">
+    Select the reference object at each image, if you don't select one, an algorithm will pick 1 to 3 reference points automatically for you.
+  </div>
+  <div class="mainContainer">
+    <div class="row">
+      <div class="col-md-8 col-lg-8">
+          <app-graph scan="../assets/graph/2t7WUuJeko7_connectivity.json"></app-graph>
+      </div>
+      <div class="col-md-8 col-lg-4">
+          <app-box3d  scan="2t7WUuJeko7" img_id = "218fdf5321f9482e85e828c56f2c0c94"> </app-box3d>
+      </div>
     </div>
-    <div class="col-md-6 col-lg-4">
-      <app-box3d id="preview" scan="2t7WUuJeko7" img_id = "218fdf5321f9482e85e828c56f2c0c94"> </app-box3d>
-    </div>
+
+  </div>
+  <div class="footerContainer">
+      <app-footer></app-footer>
   </div>
 </div>

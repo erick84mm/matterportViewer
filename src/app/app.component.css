@@ -1,0 +1,30 @@
+.footerDiv{
+  height: 15%;
+  width:100%;
+  position: fixed;
+  bottom:0;
+}
+
+.main{
+    height: 100%;
+    overflow-y:auto;
+    position:relative;
+
+}
+.row{
+  height: 100%;
+}
+
+
+
+
+
+.mainContainer{
+  height: 80vh;
+  min-height: 400px;
+  overflow: scroll;
+}
+
+.footerContainer{
+  height: 15vh;
+}

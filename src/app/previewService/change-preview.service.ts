@@ -12,8 +12,6 @@ export class ChangePreviewService {
 
 
    change(img_id) {
-    console.log('change started');
-    console.log(img_id);
      this.fire.emit(img_id);
    }
 

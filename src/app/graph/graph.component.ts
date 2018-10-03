@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Input} from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
 import { HttpClient }    from '@angular/common/http';
 import {ChangePreviewService} from '../previewService/change-preview.service';
 
@@ -27,6 +27,7 @@ export class GraphComponent implements OnInit, OnDestroy {
    public visNetworkData: NetworkData;
    public visNetworkOptions: VisNetworkOptions;
    @Input() public scan: string = null;
+   @ViewChild('graphRendererContainer') rendererContainer: ElementRef;
 
    public constructor(private visNetworkService: VisNetworkService, private http: HttpClient,private changePreviewService: ChangePreviewService) {
 
@@ -46,11 +47,11 @@ export class GraphComponent implements OnInit, OnDestroy {
        // open your console/dev tools to see the click params
        this.visNetworkService.click
            .subscribe((eventData: any[]) => {
+                     console.log(this.rendererContainer.nativeElement.offsetHeight);
                if (eventData[0] === this.visNetwork) {
                 for (let i in eventData[1]["nodes"]){
                   var img_id = eventData[1]["nodes"][i];
 
-                  console.log(img_id);
                   if(typeof img_id !== 'undefined'){
 
                       this.changePreviewService.change(img_id);
@@ -61,22 +62,29 @@ export class GraphComponent implements OnInit, OnDestroy {
            });
    }
 
+ngAfterViewInit(){
 
+          console.log(this.rendererContainer.nativeElement.offsetHeight);
+}
    public ngOnInit(): void {
+
         this.http.get(this.scan)
           .subscribe(data => {
               const nodes = data["nodes"];
               const edges = data["edges"];
-
+              var ini_height =this.rendererContainer.nativeElement.offsetHeight;
               this.visNetworkData = {
                   nodes,
                   edges,
               };
 
               this.visNetworkOptions = {
-                 physics:false,
-                 layout: {randomSeed:0}
+                 physics:{enabled:false},
+                 layout: {randomSeed:0},
+                 clickToUse: true,
+                 height: ini_height + "px",
                  interaction:{
+                  zoomView:false,
                   dragNodes:false,
                   dragView: false,
                   multiselect: true
